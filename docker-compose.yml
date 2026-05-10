@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
+      - NEXT_PUBLIC_AI_ENGINE_URL=http://localhost:8000
+      - NEXT_PUBLIC_WS_URL=http://localhost:5000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - FRONTEND_URL=http://localhost:3000
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - AI_ENGINE_URL=http://ai-engine:8000
+      - JWT_SECRET=weather_super_secret_jwt_key_2024
+      - JWT_REFRESH_SECRET=weather_super_secret_refresh_key_2024
+    depends_on:
+      - ai-engine
+
+  ai-engine:
+    build:
+      context: ./ai-engine
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"

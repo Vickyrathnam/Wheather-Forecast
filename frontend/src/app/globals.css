@@ -1,0 +1,444 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   WEATHER FORECAST - GLOBAL DESIGN SYSTEM
+   Ultra Premium Futuristic UI
+   ============================================ */
+
+:root {
+  /* Core Colors */
+  --bg-primary: #02060f;
+  --bg-secondary: #080d1a;
+  --bg-tertiary: #0d1424;
+
+  /* Neon Accent Colors */
+  --neon-blue: #00d4ff;
+  --neon-cyan: #00ffee;
+  --neon-purple: #7c3aed;
+  --neon-violet: #a855f7;
+  --neon-green: #00ff88;
+  --neon-amber: #f59e0b;
+  --neon-rose: #f43f5e;
+  --neon-orange: #fb923c;
+
+  /* Glass System */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hover: rgba(0, 212, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --glass-glow: 0 0 40px rgba(0, 212, 255, 0.08);
+
+  /* Typography */
+  --font-display: 'Outfit', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+  --gradient-aurora: linear-gradient(135deg, #00ffee 0%, #00d4ff 30%, #7c3aed 70%, #a855f7 100%);
+  --gradient-fire: linear-gradient(135deg, #f59e0b 0%, #fb923c 50%, #f43f5e 100%);
+  --gradient-ice: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 50%, #0ea5e9 100%);
+  --gradient-storm: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+
+  /* Animations */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   RESETS & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-primary);
+  color: #e2e8f0;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+/* ============================================
+   GLASSMORPHISM SYSTEM
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow), var(--glass-glow);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 212, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all var(--transition-normal);
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   NEON GLOW SYSTEM
+   ============================================ */
+.neon-blue { color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); }
+.neon-cyan { color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan); }
+.neon-purple { color: var(--neon-violet); text-shadow: 0 0 20px var(--neon-violet); }
+.neon-green { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); }
+.neon-amber { color: var(--neon-amber); text-shadow: 0 0 20px var(--neon-amber); }
+
+.glow-blue { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.1); }
+.glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 60px rgba(168, 85, 247, 0.1); }
+.glow-green { box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.1); }
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-aurora {
+  background: var(--gradient-aurora);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-fire {
+  background: var(--gradient-fire);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 0 80px rgba(0, 212, 255, 0.2); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes particle-drift {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-30px) translateX(15px) scale(1.1); opacity: 1; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+}
+
+@keyframes lightning {
+  0%, 90%, 100% { opacity: 0; }
+  5%, 15% { opacity: 1; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes hologram-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  97% { opacity: 0.9; }
+  98% { opacity: 1; }
+}
+
+/* Utility animation classes */
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-aurora { animation: aurora 8s ease infinite; background-size: 300% 300%; }
+.animate-breathe { animation: breathe 4s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-hologram { animation: hologram-flicker 8s ease-in-out infinite; }
+
+/* ============================================
+   WEATHER CONDITION THEMES
+   ============================================ */
+.weather-sunny {
+  --theme-primary: #f59e0b;
+  --theme-secondary: #fbbf24;
+  --theme-glow: rgba(245, 158, 11, 0.3);
+  --theme-bg: linear-gradient(135deg, #1a0f00 0%, #2d1a00 50%, #0f1a2e 100%);
+}
+
+.weather-rain {
+  --theme-primary: #3b82f6;
+  --theme-secondary: #60a5fa;
+  --theme-glow: rgba(59, 130, 246, 0.3);
+  --theme-bg: linear-gradient(135deg, #0a0f1f 0%, #0f1a2e 50%, #1a1a2e 100%);
+}
+
+.weather-storm {
+  --theme-primary: #7c3aed;
+  --theme-secondary: #8b5cf6;
+  --theme-glow: rgba(124, 58, 237, 0.4);
+  --theme-bg: linear-gradient(135deg, #0d0020 0%, #1a0030 50%, #0a001f 100%);
+}
+
+.weather-snow {
+  --theme-primary: #e0f2fe;
+  --theme-secondary: #7dd3fc;
+  --theme-glow: rgba(224, 242, 254, 0.2);
+  --theme-bg: linear-gradient(135deg, #050a1f 0%, #0a1030 50%, #05101f 100%);
+}
+
+.weather-night {
+  --theme-primary: #a855f7;
+  --theme-secondary: #c084fc;
+  --theme-glow: rgba(168, 85, 247, 0.3);
+  --theme-bg: linear-gradient(135deg, #000010 0%, #050015 50%, #080020 100%);
+}
+
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+.holographic-border {
+  position: relative;
+}
+
+.holographic-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-aurora);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.magnetic-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-spring);
+}
+
+.magnetic-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.magnetic-btn:hover::after { opacity: 1; }
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  opacity: 0.6;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.08);
+}
+
+/* AQI Color Scale */
+.aqi-1 { color: #00ff88; }
+.aqi-2 { color: #a3e635; }
+.aqi-3 { color: #fbbf24; }
+.aqi-4 { color: #fb923c; }
+.aqi-5 { color: #f43f5e; }
+
+/* Progress bars */
+.progress-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--gradient-primary);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(to right, transparent, white);
+  opacity: 0.5;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ============================================
+   CURSOR GLOW EFFECT
+   ============================================ */
+.cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* ============================================
+   WEATHER CANVAS
+   ============================================ */
+.weather-canvas-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+@media (max-width: 768px) {
+  .glass-card { border-radius: 10px; }
+  .glass-strong { border-radius: 14px; }
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}
