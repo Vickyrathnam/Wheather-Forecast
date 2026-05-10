@@ -1,11 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Brain, Cloud, Shield, Activity, Globe, Zap, Cpu, MapPin, Search, Thermometer, Droplets, Wind, Eye, Gauge, Compass } from 'lucide-react';
+import AIChatEngine from '@/components/ai/AIChatEngine';
+import WorldMapCTA from '@/components/landing/WorldMapCTA';
 
 export default function FeaturesSection() {
+  const [chatOpen, setChatOpen] = useState(false);
+
   return (
-    <div style={{
+    <>
+      <div style={{
       background: 'linear-gradient(to bottom, #020617, #090514)',
       color: '#e2e8f0',
       fontFamily: 'Inter, sans-serif',
@@ -13,6 +19,7 @@ export default function FeaturesSection() {
       position: 'relative',
       overflow: 'hidden'
     }}>
+
       {/* Background glow effects */}
       <div style={{ position: 'absolute', top: '10%', left: '20%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(0, 212, 255, 0.05), transparent 70%)', zIndex: 0 }} />
       <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.05), transparent 70%)', zIndex: 0 }} />
@@ -49,7 +56,14 @@ export default function FeaturesSection() {
           {/* CTA & Labels */}
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3rem' }}>
             <button className="glow-button" style={{ padding: '0.8rem 1.5rem', borderRadius: 8, background: 'linear-gradient(135deg, #00d4ff, #a855f7)', color: 'white', border: 'none', fontWeight: 600, cursor: 'pointer' }}>Explore Forecast</button>
-            <button style={{ padding: '0.8rem 1.5rem', borderRadius: 8, background: 'rgba(255,255,255,0.05)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', fontWeight: 600, cursor: 'pointer' }}>Launch AI Climate Engine</button>
+            <motion.button
+              onClick={() => setChatOpen(true)}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(0,212,255,0.4)' }}
+              whileTap={{ scale: 0.97 }}
+              style={{ padding: '0.8rem 1.5rem', borderRadius: 8, background: 'rgba(0,212,255,0.08)', color: '#00d4ff', border: '1px solid rgba(0,212,255,0.3)', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              ⚡ Launch AI Climate Engine
+            </motion.button>
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -288,5 +302,12 @@ export default function FeaturesSection() {
 
       </div>
     </div>
+
+    {/* World Map CTA */}
+    <WorldMapCTA />
+
+    {/* AI Chat Engine Modal */}
+    <AIChatEngine isOpen={chatOpen} onClose={() => setChatOpen(false)} />
+    </>
   );
 }
