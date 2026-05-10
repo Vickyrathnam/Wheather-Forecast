@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Brain, Cloud, Shield, Activity, Globe, Zap, Cpu, MapPin, Search, Thermometer, Droplets, Wind, Eye, Gauge, Compass } from 'lucide-react';
 import AIChatEngine from '@/components/ai/AIChatEngine';
-import WorldMapCTA from '@/components/landing/WorldMapCTA';
+
 
 export default function FeaturesSection() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -204,12 +204,21 @@ export default function FeaturesSection() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-            {['Temperature Forecasting', 'Rainfall Intelligence', 'Cyclone Detection', 'Flood Risk Analysis', 'Heatwave Alerts'].map((item, i) => (
-              <div key={i} className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                <span style={{ color: '#00d4ff', fontSize: '0.9rem', fontWeight: 600 }}>{item}</span>
-              </div>
-            ))}
+          <div className="marquee-container">
+            <div className="marquee-content">
+              {['Temperature Forecasting', 'Rainfall Intelligence', 'Cyclone Detection', 'Flood Risk Analysis', 'Heatwave Alerts'].map((item, i) => (
+                <div key={i} className="glass-card" style={{ padding: '1.5rem', textAlign: 'center', minWidth: '220px' }}>
+                  <span style={{ color: '#00d4ff', fontSize: '0.9rem', fontWeight: 600, fontFamily: 'Poppins, sans-serif' }}>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div className="marquee-content">
+              {['Temperature Forecasting', 'Rainfall Intelligence', 'Cyclone Detection', 'Flood Risk Analysis', 'Heatwave Alerts'].map((item, i) => (
+                <div key={i + 10} className="glass-card" style={{ padding: '1.5rem', textAlign: 'center', minWidth: '220px' }}>
+                  <span style={{ color: '#00d4ff', fontSize: '0.9rem', fontWeight: 600, fontFamily: 'Poppins, sans-serif' }}>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -302,9 +311,6 @@ export default function FeaturesSection() {
 
       </div>
     </div>
-
-    {/* World Map CTA */}
-    <WorldMapCTA />
 
     {/* AI Chat Engine Modal */}
     <AIChatEngine isOpen={chatOpen} onClose={() => setChatOpen(false)} />

@@ -14,6 +14,7 @@ import RadarView from '@/components/dashboard/RadarView';
 import AdminDashboard from '@/components/dashboard/AdminDashboard';
 import VoiceAssistant from '@/components/voice/VoiceAssistant';
 import FeaturesSection from '@/components/landing/FeaturesSection';
+import WorldMapCTA from '@/components/landing/WorldMapCTA';
 import CustomCursor from '@/components/ui/CustomCursor';
 import { Sun, Cloud, CloudRain, CloudLightning, Snowflake, Moon, AlertTriangle, Search, MapPin } from 'lucide-react';
 import { searchCities } from '@/services/weatherApi';
@@ -445,6 +446,9 @@ export default function HomePage() {
                 <RightPanel />
               </div>
             </div>
+
+            {/* World Map CTA */}
+            <WorldMapCTA />
 
             {/* Features Section */}
             <FeaturesSection />

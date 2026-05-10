@@ -122,7 +122,7 @@ export default function VoiceAssistant() {
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Volume2 size={22} color="#ffffff" />
+        <BrainCircuit size={24} color="#ffffff" />
       </motion.button>
 
       {/* Assistant panel */}

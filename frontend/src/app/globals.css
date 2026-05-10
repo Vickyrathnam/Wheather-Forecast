@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
 /* ============================================
@@ -31,9 +32,10 @@
   --glass-glow: 0 0 40px rgba(0, 212, 255, 0.08);
 
   /* Typography */
-  --font-display: 'Outfit', 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Poppins', 'Outfit', sans-serif;
+  --font-body: 'Poppins', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
+
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
@@ -442,3 +444,28 @@ body {
 @media (min-width: 769px) {
   .hide-desktop { display: none !important; }
 }
+
+/* Marquee for slow motion scrolling */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1rem;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
