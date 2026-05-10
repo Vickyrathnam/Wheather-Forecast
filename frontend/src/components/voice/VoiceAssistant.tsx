@@ -2,53 +2,23 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, MicOff, X, Volume2 } from 'lucide-react';
+import { Mic, MicOff, X, Volume2, BrainCircuit } from 'lucide-react';
 import { useWeatherStore } from '@/store/weatherStore';
 
-const AI_RESPONSES: Record<string, string> = {
-  weather: "Based on current atmospheric data, I'm detecting {condition} conditions with a temperature of {temp}°C. AI models show {confidence}% confidence in today's forecast.",
-  rain: "AI rain probability analysis: {rainProb}% chance of precipitation in the next 24 hours. LSTM model detects {stormRisk}% storm formation risk.",
-  temperature: "Current temperature is {temp}°C, feeling like {feelsLike}°C. Neural forecast predicts a high of {tempMax}° and low of {tempMin}° today.",
-  wind: "Wind speeds at {wind} km/h from the {direction} direction. AI wind evolution model projects gusts up to {windMax} km/h over the next 6 hours.",
-  aqi: "Air Quality Index is {aqi} — classified as {aqiCategory}. PM2.5 levels at {pm25} μg/m³. Indoor activities recommended during peak hours.",
-  forecast: "7-day AI ensemble forecast: Temperatures ranging from {tempMin}° to {tempMax}°. {stormRisk}% probability of severe weather. Model accuracy: 97.3%.",
-  advice: "Based on current weather intelligence: {advice}. AI confidence: {confidence}%. Stay informed with real-time atmospheric updates.",
-  hello: "Hello! I'm WeatherAI, your intelligent climate assistant. Ask me about current conditions, forecasts, air quality, or weather alerts. I process real-time satellite data and AI predictions.",
-  default: "I'm analyzing atmospheric data for your location. Current conditions show {condition} with AI prediction confidence at {confidence}%. Would you like specific forecast details?",
-};
-
-function generateResponse(input: string, weatherData: ReturnType<typeof useWeatherStore>['weatherData'], aiPrediction: ReturnType<typeof useWeatherStore>['aiPrediction']) {
-  const lower = input.toLowerCase();
-  let template = AI_RESPONSES.default;
-
-  if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) template = AI_RESPONSES.hello;
-  else if (lower.includes('rain') || lower.includes('precipitation')) template = AI_RESPONSES.rain;
-  else if (lower.includes('temp') || lower.includes('hot') || lower.includes('cold')) template = AI_RESPONSES.temperature;
-  else if (lower.includes('wind')) template = AI_RESPONSES.wind;
-  else if (lower.includes('air') || lower.includes('aqi') || lower.includes('quality')) template = AI_RESPONSES.aqi;
-  else if (lower.includes('forecast') || lower.includes('week') || lower.includes('tomorrow')) template = AI_RESPONSES.forecast;
-  else if (lower.includes('advice') || lower.includes('suggest') || lower.includes('recommend')) template = AI_RESPONSES.advice;
-  else if (lower.includes('weather') || lower.includes('condition')) template = AI_RESPONSES.weather;
-
-  const w = weatherData;
-  const ai = aiPrediction;
-
-  return template
-    .replace('{condition}', w?.condition || 'clear')
-    .replace('{temp}', String(w?.temperature || 22))
-    .replace('{feelsLike}', String(w?.feelsLike || 21))
-    .replace('{tempMax}', String(w?.tempMax || 25))
-    .replace('{tempMin}', String(w?.tempMin || 18))
-    .replace('{wind}', String(w?.windSpeed || 15))
-    .replace('{direction}', 'NE')
-    .replace('{windMax}', String((w?.windSpeed || 15) + 10))
-    .replace('{aqi}', String(w?.aqi || 1))
-    .replace('{aqiCategory}', w?.aqiCategory || 'Good')
-    .replace('{pm25}', String(w?.pm25?.toFixed(1) || '12.0'))
-    .replace('{rainProb}', String(Math.round(ai?.rainProbability || 30)))
-    .replace('{stormRisk}', String(Math.round(ai?.stormRisk || 15)))
-    .replace('{confidence}', String(ai?.confidence?.overall || 93))
-    .replace('{advice}', w?.temperature > 35 ? 'Extreme heat detected — stay hydrated and avoid peak sun hours' : 'Conditions are favorable for outdoor activities');
+async function fetchAiResponse(input: string, weatherData: any, aiPrediction: any) {
+  try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+    const res = await fetch(`${backendUrl}/api/ai/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: input, weatherData, aiPrediction })
+    });
+    const data = await res.json();
+    return data.reply || "I'm having trouble connecting to my neural network.";
+  } catch (e) {
+    console.error('Failed to get AI response', e);
+    return "Communications link with the AI core has been interrupted.";
+  }
 }
 
 export default function VoiceAssistant() {
@@ -82,15 +52,18 @@ export default function VoiceAssistant() {
     }, 18);
   }, []);
 
-  const handleQuery = useCallback((query: string) => {
+  const handleQuery = useCallback(async (query: string) => {
     if (!query.trim()) return;
-    const aiResponse = generateResponse(query, weatherData, aiPrediction);
-    setMessages(prev => [...prev,
-      { role: 'user', text: query },
-      { role: 'ai', text: aiResponse }
-    ]);
-    typeResponse(aiResponse);
+    
+    // Add user message instantly
+    setMessages(prev => [...prev, { role: 'user', text: query }]);
     setTranscript('');
+    setIsTyping(true);
+
+    const aiResponse = await fetchAiResponse(query, weatherData, aiPrediction);
+    
+    setMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
+    typeResponse(aiResponse);
   }, [weatherData, aiPrediction, typeResponse]);
 
   const startListening = useCallback(() => {
@@ -111,6 +84,12 @@ export default function VoiceAssistant() {
         handleQuery(text);
         setIsListening(false);
       }
+    };
+
+    recognition.onerror = (e) => {
+      console.error('Speech recognition error', e.error);
+      setIsListening(false);
+      alert(`Microphone error: ${e.error}. Please ensure microphone permissions are granted and you are using Chrome or Edge.`);
     };
 
     recognition.onend = () => setIsListening(false);
@@ -179,13 +158,16 @@ export default function VoiceAssistant() {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   style={{
-                    width: 28, height: 28, borderRadius: '50%',
+                    width: 32, height: 32, borderRadius: '50%',
                     background: 'radial-gradient(circle, rgba(0,212,255,0.9), rgba(124,58,237,0.7))',
                     boxShadow: '0 0 12px rgba(0,212,255,0.5)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}
-                />
+                >
+                  <BrainCircuit size={18} color="white" />
+                </motion.div>
                 <div>
-                  <div style={{ color: '#e2e8f0', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>WeatherAI</div>
+                  <div style={{ color: '#e2e8f0', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Outfit, sans-serif' }}>Weather Forecast</div>
                   <div style={{ color: '#00ff88', fontSize: '0.6rem', letterSpacing: '0.1em', fontFamily: 'Space Grotesk, monospace' }}>● ONLINE</div>
                 </div>
               </div>

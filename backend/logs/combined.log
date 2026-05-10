@@ -1,0 +1,145 @@
+2026-05-10 16:09:49 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 16:09:49 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 16:09:49 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 16:09:49 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 16:09:49 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 16:10:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 16:10:01 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 16:20:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 16:20:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 16:30:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 16:30:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:50:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 16:50:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 16:57:50 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 16:57:50 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 16:57:50 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 16:57:50 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 16:57:50 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 16:58:03 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 16:58:03 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 16:58:03 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 16:58:03 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 16:58:03 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:00:11 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:00:11 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:00:11 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:00:11 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:00:11 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:05:31 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:05:31 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:05:31 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:05:31 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:05:31 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:10:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 17:10:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 17:11:36 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:11:36 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:11:36 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:11:36 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:11:36 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:11:58 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:11:58 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:11:58 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:11:58 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:11:58 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:19:14 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:19:14 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:19:14 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:19:14 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:19:14 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:20:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 17:20:01 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 17:28:09 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:28:09 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:28:09 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:28:09 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:28:09 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:30:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 17:30:01 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 17:33:13 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:33:13 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:33:13 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:33:13 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:33:13 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:33:45 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:33:45 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:33:45 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:33:45 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:33:45 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:34:09 [[31merror[39m]: Unhandled Promise Rejection: weatherData is not defined
+ReferenceError: weatherData is not defined
+    at C:\Users\vinod\.gemini\antigravity\scratch\weather-forecast\backend\src\routes\aiChat.js:48:112
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-05-10 17:35:43 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:35:43 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:35:43 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:35:43 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:35:43 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:36:06 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:36:06 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:36:06 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:36:06 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:36:06 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:37:07 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:37:07 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:37:07 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:37:07 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:37:07 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:37:15 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:37:15 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:37:15 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:37:15 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:37:15 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:40:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 17:40:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 17:40:36 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:40:36 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:40:36 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:40:36 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:40:36 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:40:45 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 17:40:45 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 17:40:45 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 17:40:45 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 17:40:45 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 17:50:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 17:50:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 18:00:00 [[33mwarn[39m]: ⚠️ Alert broadcast: heat - Heat Advisory
+2026-05-10 18:00:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 18:00:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 18:08:15 [[32minfo[39m]: ✅ Socket.IO initialized
+2026-05-10 18:08:15 [[32minfo[39m]: ⏰ Weather cron jobs started
+2026-05-10 18:08:15 [[32minfo[39m]: 🚀 Weather Forecast Backend running on port 5000
+2026-05-10 18:08:15 [[32minfo[39m]: 🌐 Environment: development
+2026-05-10 18:08:15 [[32minfo[39m]: 📡 WebSocket server initialized
+2026-05-10 18:10:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 18:10:00 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 18:20:00 [[32minfo[39m]: 🔄 Refreshing global weather data...
+2026-05-10 18:20:01 [[32minfo[39m]: ✅ Global weather data refreshed
+2026-05-10 18:23:54 [[31merror[39m]: Weather fetch error:
+2026-05-10 18:23:54 [[31merror[39m]: Weather fetch error:

@@ -3,15 +3,20 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useWeatherStore } from '@/store/weatherStore';
-import { useWeatherData } from '@/hooks/useWeather';
+import { useWeatherData, useGeolocation } from '@/hooks/useWeather';
 import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/loading/LoadingScreen';
 import Navbar from '@/components/ui/Navbar';
 import WeatherInfoPanel from '@/components/dashboard/WeatherInfoPanel';
 import AIPredictionPanel from '@/components/dashboard/AIPredictionPanel';
 import ForecastStrip from '@/components/dashboard/ForecastStrip';
+import RadarView from '@/components/dashboard/RadarView';
+import AdminDashboard from '@/components/dashboard/AdminDashboard';
 import VoiceAssistant from '@/components/voice/VoiceAssistant';
-import { Sun, Cloud, CloudRain, CloudLightning, Snowflake, Moon, AlertTriangle } from 'lucide-react';
+import FeaturesSection from '@/components/landing/FeaturesSection';
+import CustomCursor from '@/components/ui/CustomCursor';
+import { Sun, Cloud, CloudRain, CloudLightning, Snowflake, Moon, AlertTriangle, Search, MapPin } from 'lucide-react';
+import { searchCities } from '@/services/weatherApi';
 
 // Dynamic imports for heavy 3D components
 const WeatherEngine = dynamic(() => import('@/components/weather/WeatherEngine'), {
@@ -89,6 +94,14 @@ function AlertBar() {
 // Left panel - Weather Engine with controls
 function LeftPanel() {
   const { weatherMode, setWeatherMode, weatherData, currentCity } = useWeatherStore();
+  const [time, setTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }, 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div style={{ position: 'relative', height: '100%', overflow: 'hidden' }}>
@@ -115,7 +128,37 @@ function LeftPanel() {
           <div style={{ color: '#e2e8f0', fontSize: '1rem', fontWeight: 700, fontFamily: 'Outfit, sans-serif' }}>
             {currentCity}
           </div>
+          <div style={{ color: '#00d4ff', fontSize: '0.85rem', fontWeight: 600, marginTop: '0.2rem', fontFamily: 'Space Grotesk, monospace' }}>
+            {time}
+          </div>
+          
+          {/* Temperature Section Moved Here */}
+          {weatherData && (
+            <div style={{ marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '0.75rem' }}>
+              <div style={{
+                fontSize: '3rem',
+                fontWeight: 800,
+                fontFamily: 'Outfit, sans-serif',
+                background: 'linear-gradient(135deg, #ffffff, rgba(255,255,255,0.6))',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                lineHeight: 1,
+              }}>
+                {weatherData.temperature}°
+              </div>
+              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', textTransform: 'capitalize', marginTop: '0.25rem' }}>
+                {weatherData.description}
+              </div>
+            </div>
+          )}
         </motion.div>
+      </div>
+
+      {/* Hero Search Bar */}
+      <div style={{
+        position: 'absolute', top: '1.5rem', left: '50%', transform: 'translateX(-50%)',
+        zIndex: 10, width: '40%', minWidth: '300px'
+      }}>
+        <HeroSearch />
       </div>
 
       {/* Weather mode controls */}
@@ -147,38 +190,105 @@ function LeftPanel() {
         ))}
       </div>
 
-      {/* Temperature overlay */}
-      {weatherData && (
+      {/* Temperature overlay was moved to top-left overlay */}
+
+      {/* 7-Day Forecast Overlay at the bottom */}
+      <div style={{
+        position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)',
+        zIndex: 10, width: '90%', maxWidth: '800px',
+      }}>
         <div style={{
-          position: 'absolute', bottom: '4rem', left: '1.5rem',
-          zIndex: 10,
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)',
+          borderRadius: 16, padding: '1rem', border: '1px solid rgba(255,255,255,0.1)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
         }}>
+          <ForecastStrip />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Hero Search Bar Component
+function HeroSearch() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<{name:string; country:string; lat:number; lon:number}[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const { setLocation } = useWeatherStore();
+  const timeoutRef = useRef<any>(null);
+
+  const handleSearch = (val: string) => {
+    setQuery(val);
+    if (val.length < 2) { setResults([]); return; }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const res = await searchCities(val);
+        setResults(res);
+        setIsOpen(true);
+      } catch {}
+    }, 300);
+  };
+
+  const handleSelect = (r: any) => {
+    setLocation(`${r.name}, ${r.country}`, r.lat, r.lon);
+    setQuery('');
+    setIsOpen(false);
+  };
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '0.5rem',
+        background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(16px)',
+        border: '1px solid rgba(255,255,255,0.15)', borderRadius: 12,
+        padding: '0.6rem 1rem',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+      }}>
+        <Search size={16} color="rgba(255,255,255,0.5)" />
+        <input
+          value={query}
+          onChange={e => handleSearch(e.target.value)}
+          placeholder="Search any location..."
+          style={{
+            background: 'transparent', border: 'none', outline: 'none',
+            color: 'white', width: '100%', fontSize: '0.9rem',
+            fontFamily: 'Inter, sans-serif'
+          }}
+        />
+      </div>
+      <AnimatePresence>
+        {isOpen && results.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             style={{
-              background: 'rgba(0,0,0,0.25)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: 16, padding: '1rem 1.25rem',
-              border: '1px solid rgba(255,255,255,0.1)',
+              position: 'absolute', top: '110%', left: 0, right: 0,
+              background: 'rgba(2,6,15,0.95)', backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(0,212,255,0.3)', borderRadius: 12,
+              overflow: 'hidden', zIndex: 50,
             }}
           >
-            <div style={{
-              fontSize: 'clamp(3rem, 8vw, 5rem)',
-              fontWeight: 800,
-              fontFamily: 'Outfit, sans-serif',
-              background: 'linear-gradient(135deg, #ffffff, rgba(255,255,255,0.6))',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              lineHeight: 1,
-            }}>
-              {weatherData.temperature}°
-            </div>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', textTransform: 'capitalize', marginTop: '0.25rem' }}>
-              {weatherData.description}
-            </div>
+            {results.map((r, i) => (
+              <div
+                key={i}
+                onClick={() => handleSelect(r)}
+                style={{
+                  padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
+                  borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer',
+                  color: 'white', transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,212,255,0.1)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+              >
+                <MapPin size={14} color="#00d4ff" />
+                <span style={{ fontSize: '0.85rem' }}>{r.name}, <span style={{ color: 'rgba(255,255,255,0.5)' }}>{r.country}</span></span>
+              </div>
+            ))}
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -186,13 +296,6 @@ function LeftPanel() {
 // Right panel - AI Dashboard
 function RightPanel() {
   const { activePanel } = useWeatherStore();
-  const [activeTab, setActiveTab] = useState<'weather' | 'ai' | 'globe'>('weather');
-
-  const tabs = [
-    { id: 'weather', label: 'Weather' },
-    { id: 'ai', label: 'AI Engine' },
-    { id: 'globe', label: '3D Globe' },
-  ] as const;
 
   return (
     <div style={{
@@ -201,43 +304,28 @@ function RightPanel() {
       backdropFilter: 'blur(40px)',
       borderLeft: '1px solid rgba(255,255,255,0.05)',
     }}>
-      {/* Tab bar */}
       <div style={{
-        display: 'flex',
-        padding: '0.75rem 1rem 0',
-        gap: '0.25rem',
+        padding: '1rem',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
+        background: 'linear-gradient(90deg, rgba(0,212,255,0.05), transparent)',
         flexShrink: 0,
       }}>
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              padding: '0.4rem 0.75rem',
-              borderRadius: '6px 6px 0 0',
-              background: activeTab === tab.id ? 'rgba(0,212,255,0.1)' : 'transparent',
-              border: 'none',
-              borderBottom: activeTab === tab.id ? '2px solid #00d4ff' : '2px solid transparent',
-              color: activeTab === tab.id ? '#00d4ff' : 'rgba(255,255,255,0.4)',
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-              fontFamily: 'Inter, sans-serif',
-              transition: 'all 0.2s',
-              letterSpacing: '0.03em',
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+        <h2 style={{ 
+          fontSize: '1.2rem', fontWeight: 700, fontFamily: 'Outfit, sans-serif',
+          background: 'linear-gradient(135deg, #00d4ff, #a855f7)',
+          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+          textTransform: 'capitalize'
+        }}>
+          {activePanel} View
+        </h2>
       </div>
 
-      {/* Tab content */}
+      {/* Content area based on active panel from Navbar */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '0.75rem' }}>
         <AnimatePresence mode="wait">
-          {activeTab === 'weather' && (
+          {activePanel === 'dashboard' && (
             <motion.div
-              key="weather"
+              key="dashboard"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
@@ -245,12 +333,11 @@ function RightPanel() {
               style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
             >
               <WeatherInfoPanel />
-              <ForecastStrip />
             </motion.div>
           )}
-          {activeTab === 'ai' && (
+          {activePanel === 'analytics' && (
             <motion.div
-              key="ai"
+              key="analytics"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
@@ -259,15 +346,37 @@ function RightPanel() {
               <AIPredictionPanel />
             </motion.div>
           )}
-          {activeTab === 'globe' && (
+          {activePanel === 'map' && (
             <motion.div
-              key="globe"
+              key="map"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ height: 'calc(100vh - 200px)', borderRadius: 12, overflow: 'hidden' }}
+              style={{ height: 'calc(100vh - 140px)', borderRadius: 12, overflow: 'hidden', position: 'relative' }}
             >
               <GlobeMap />
+            </motion.div>
+          )}
+          {activePanel === 'radar' && (
+            <motion.div
+              key="radar"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ height: 'calc(100vh - 140px)' }}
+            >
+              <RadarView />
+            </motion.div>
+          )}
+          {activePanel === 'admin' && (
+            <motion.div
+              key="admin"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <AdminDashboard />
             </motion.div>
           )}
         </AnimatePresence>
@@ -282,6 +391,12 @@ export default function HomePage() {
 
   // Fetch weather data
   useWeatherData();
+
+  const { requestLocation } = useGeolocation();
+
+  useEffect(() => {
+    requestLocation();
+  }, [requestLocation]);
 
   const handleLoadingComplete = useCallback(() => {
     setShowLoading(false);
@@ -300,10 +415,13 @@ export default function HomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}
+            style={{ minHeight: '100vh', position: 'relative', overflowY: 'auto' }}
           >
             {/* Cursor glow */}
             <CursorGlow />
+
+            {/* Custom Cursor */}
+            <CustomCursor />
 
             {/* Navbar */}
             <Navbar />
@@ -327,6 +445,9 @@ export default function HomePage() {
                 <RightPanel />
               </div>
             </div>
+
+            {/* Features Section */}
+            <FeaturesSection />
 
             {/* Voice AI Assistant */}
             <VoiceAssistant />

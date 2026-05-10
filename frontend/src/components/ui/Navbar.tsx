@@ -86,7 +86,7 @@ export default function Navbar() {
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           letterSpacing: '-0.01em',
         }}>
-          WeatherAI
+          Weather Forecast
         </span>
       </div>
 

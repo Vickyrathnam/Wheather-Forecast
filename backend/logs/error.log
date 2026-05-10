@@ -1,0 +1,30 @@
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 16:41:27 [[31merror[39m]: Weather fetch error:
+2026-05-10 17:34:09 [[31merror[39m]: Unhandled Promise Rejection: weatherData is not defined
+ReferenceError: weatherData is not defined
+    at C:\Users\vinod\.gemini\antigravity\scratch\weather-forecast\backend\src\routes\aiChat.js:48:112
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-05-10 18:23:54 [[31merror[39m]: Weather fetch error:
+2026-05-10 18:23:54 [[31merror[39m]: Weather fetch error:

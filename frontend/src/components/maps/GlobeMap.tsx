@@ -122,11 +122,6 @@ export default function GlobeMap() {
           .width(el.clientWidth)
           .height(el.clientHeight);
 
-        // Add cloud layer (matching globe.gl clouds example)
-        globe
-          .cloudsImageUrl('//unpkg.com/three-globe/example/img/earth-clouds.png')
-          .cloudsOpacity(0.4);
-
         // Points for weather cities
         if (pointsData.length) {
           globe

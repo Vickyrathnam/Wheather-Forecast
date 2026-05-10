@@ -12,8 +12,9 @@ const weatherRoutes = require('./routes/weather');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const aiRoutes = require('./routes/ai');
-const alertRoutes = require('./routes/alerts');
 const adminRoutes = require('./routes/admin');
+const alertRoutes = require('./routes/alerts');
+const aiChatRoutes = require('./routes/aiChat');
 
 const app = express();
 
@@ -75,6 +76,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/ai/chat', aiChatRoutes);
 
 // 404 handler
 app.use('*', (req, res) => {
