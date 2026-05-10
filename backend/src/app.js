@@ -25,7 +25,11 @@ app.use(helmet({
 }));
 
 // CORS
-const allowedOrigins = ['http://localhost:3000', 'https://wheather-forecast-3ww80ilzy-vinodrathnams-projects.vercel.app'];
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://wheather-forecast-orpin.vercel.app',
+  'https://wheather-forecast-3ww80ilzy-vinodrathnams-projects.vercel.app',
+];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
